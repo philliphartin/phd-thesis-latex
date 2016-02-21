@@ -1,22 +1,17 @@
 %% ----------------------------------------------------------------
-%% Thesis.tex -- MAIN FILE (the one that you compile)
+%% Thesis.tex -- MAIN FILE
 %% ----------------------------------------------------------------
 
-% Set up the document:
 \documentclass[a4paper, 12pt, oneside]{Thesis}  % Use the "Thesis" style, based on the ECS Thesis style by Steve Gunn
 
-% Add more package in Package.tex:
+% Add packages from Package.tex:
 \input{Settings/Packages.tex}
 \hypersetup{urlcolor=black, colorlinks=true}  % Colours hyperlinks
 \input{Settings/Administrative.tex}
 
 %% ----------------------------------------------------------------
 \begin{document}
-\frontmatter  % Begin Roman style (i, ii, iii, iv...) page numbering
-
-% Here the first pages are imported, you can find them in the Frontpages folder
-% Files in the subfolder Fixed does not need to be edited.
-% If you don't need any of these sections, simply comment, or delete, the input-row
+\frontmatter  % Begin Roman style page numbering
 
 %% All the pages before the chapters ------------------------------
 \input{Frontpages/Fixed/Title}
@@ -37,25 +32,25 @@
 \pagestyle{fancy}  % Return the page headers back to the "fancy" style
 
 \input{Chapters/Introduction} % 1 Introduction
-\input{Chapters/LiteratureReview} % 2 Dementia and Technology Lit Review
-\input{Chapters/Treatment-Study-1} % 3 TAUT App and Prediction Results
-\input{Chapters/Prevention-Study-1} % 4 GM Framework
-\input{Chapters/Prevention-Study-2} % 5 GM Evaluation
-\input{Chapters/Prevention-Study-3} % 6 GM Study & Results
-\input{Chapters/Conclusion} % 7 Conclusion
+%\input{Chapters/draft/LiteratureReview} % 2 Dementia and Technology Lit Review
+%\input{Chapters/draft/Treatment-Study-1} % 3 TAUT App and Prediction Results
+%\input{Chapters/draft/Prevention-Study-1} % 4 GM Framework
+%\input{Chapters/draft/Prevention-Study-2} % 5 GM Evaluation
+%\input{Chapters/draft/Prevention-Study-3} % 6 GM Study & Results
+%\input{Chapters/draft/Conclusion} % 7 Conclusion
 
 %% Appendices -----------------------------------------------------
 \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
-\lhead{\emph{Appendices}}  % Change the left side page header to "Appendices"
-\appendix % Cue to tell LaTeX that the following 'chapters' are Appendices
+\lhead{\emph{Appendices}}
+\appendix 
 
 \input{Appendices/AppendixA} % Prevention appendix
 \input{Appendices/AppendixB} % Prevention appendix
 
 %% Bibliography 
-\backmatter % Cue to tell LaTeX that the following 'chapters' are Bibliography
+\backmatter
 \label{Bibliography}
-\lhead{\emph{Bibliography}}  % left side page header to "Bibliography"
+\lhead{\emph{Bibliography}}
 
 \begingroup
 \raggedright
