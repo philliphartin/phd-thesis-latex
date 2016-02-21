@@ -1,0 +1,21 @@
+% Set up the Title Page - DO NOT EDIT THIS, (if you don't want to ;)  )
+% instead specify your name, title and more in "/Settings/Administrative.tex"
+\title   {\myTitle}
+\authors {\texorpdfstring
+            {\href{\myAuthorEmail}{\myAuthorName}}
+            {\myAuthorName}
+         }
+\addresses  {\groupname\\\deptname\\\univname}  
+\date       {\myDate}
+\subject    {\mySubject}
+\keywords   {\myKeywords}
+
+\maketitle
+%% ----------------------------------------------------------------
+
+\setstretch{1.3}  % It is better to have smaller font and larger line spacing than the other way round
+
+% Define the page headers using the FancyHdr package and set up for one-sided printing
+\fancyhead{}  % Clears all page headers and footers
+\rhead{\thepage}  % Sets the right side header to show the page number
+\lhead{}  % Clears the left side page header

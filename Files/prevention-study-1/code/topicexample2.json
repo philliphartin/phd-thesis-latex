@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "food",
+        "nameDisplay": "Food",
+        "description": "Healthy food choices feed the brain and lower...",
+        "dailyFacts": [
+            {
+                "fact": "Low intake of sweets is linked to...",
+                "suggestion": "Try replacing soda with water.",
+            }
+        ],
+        "measures": [
+            {
+                "id": 1,
+                "name": "fruit",
+                "recommended": "5",
+                "...": "..."
+            }
+        ]
+    }
+]

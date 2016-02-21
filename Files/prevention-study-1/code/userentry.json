@@ -1,0 +1,14 @@
+{
+    "id": 1234,
+    "topicId": 4,
+    "userId": 5678,
+    "measureName": "physical_vigorous",
+    "value": 15,
+    "goalRecommended": 20,
+    "goalUser": 18,
+    "date": "2015-09-08T11:54:52+00:00",
+    "dateUnix": 1441713292,
+    "dateUpdated": "2015-09-08T11:54:52+00:00",
+    "dateUpdatedUnix": 1441713292,
+    "source": "activity_tracker_wrist",
+}
