@@ -40,8 +40,8 @@ There are two relevant states in which a reminder can be issued for a PwD:
 \item A bad time.
 \end{enumerate}
 
-Whilst this approach may seem crudely simplistic and unrefined, other approaches have become ultra-refined and overly concerned with addressing low-level problems, such as inferring the users exact current location in the home \cite{Grunerbl2011} or the best presentation format based upon the users current location \cite{Tang2011}. Consequently, future effort is spent refining these approaches for marginal gains in system accuracy, for systems which have become bespoke to the designer's problem. Eventually, the core research aim which aimed to improve the delivery for a PwD has become obscured. The reason for the technical complexity of these systems is in direct response to the complexity found in modelling human behaviours.  As mentioned earlier, a PwD's approach to a task can be extremely varied and unpredictable. No single approach, thus far, can handle all the variability found at a low-level, especially across numerous people. Given the aforementioned variability in behaviour found between persons, an appropriate \textit{good} time for one person, may not be the same for another. It is here that the true issue persists. This is also where a broad, generalised, approach would suffer from usability limitations. There is the opportunity, however, to utilise machine learning to personalise the approach.
-%TODO: Get reference for 
+Whilst this approach may seem crudely simplistic and unrefined, other approaches have become ultra-refined and overly concerned with addressing low-level problems, such as inferring the users exact current location in the home \cite{Grunerbl2011} or the best presentation format based upon the users current location \cite{Tang2011}. Consequently, future effort is spent refining these approaches for marginal gains in system accuracy, for systems which have become bespoke to the designer's problem. Eventually, the core research aim which aimed to improve the delivery for a PwD has become obscured. The reason for the technical complexity of these systems is in direct response to the complexity found in modelling human behaviours.  As mentioned earlier, a PwD's approach to a task can be extremely varied and unpredictable. No single approach, thus far, can handle all the variability found at a low-level, especially across numerous people \cite{Chan2008}. Given the aforementioned variability in behaviour found between persons, an appropriate \textit{good} time for one person, may not be the same for another \cite{Fischer2012}. It is here that the true issue persists. This is also where a broad, generalised, approach would suffer from usability limitations \cite{Fischer2012}. There is the opportunity, however, to utilise machine learning to personalise the approach.
+%VIVA: Prepare defence of these statements
 
 \textbf{Personalise for Increased Efficacy.}
 A generalised approach may be applicable to a larger audience, however, the usability and efficacy can still be improved for each individual. With a smartphone based reminder app, there is the opportunity to learn how each individual prefers to use the app, and which contexts are a \textit{good} time to remind.
@@ -795,14 +795,12 @@ Resampling is performed by simply replicating instances of the minority class ba
 \textbf{Downsampling.}
 Downsampling is the opposite approach, and involves removing instances from the majority class, so that the distribution is equal. 
 
-Both of these methods bring distinct disadvantages, namely overfitting to the minority class in resampling, and losing truth and variance in downsampling. An ideal and optimal approach is the use of synthetic data [ref].
-% TODO: Find reference to support statement
+Both of these methods bring distinct disadvantages, namely overfitting to the minority class in resampling, and losing truth and variance in downsampling. An ideal and optimal approach is the use of synthetic data \cite{nonnemaker2008}.
 
 \textbf{Synthetic Data.} The generation of synthetic data based on the minority class is a method of balancing the dataset. The most popular of such algorithms is the Synthetic Minority Over-sampling Technique (SMOTE). SMOTE functions by selecting a number of instances, and randomly alters the data one attribute at a time within a neighbouring difference of the selected instances. This results in the creation of additional instances that are similar, through statistical methods, however, not exact copies of instances from the same class \cite{Chawla2011}. SMOTE has been applied to many binary classification problems to help balance datasets across various research fields including pharmacology \cite{Kumari2015}, oncology \cite{Fehr2015}, information science \cite{Cleland2014-IWAAL, Zhang2013}, and even radar ornithology \cite{D.Rosa2016}.
 
 Having applied SMOTE to the minority class (Acknowledged) to an effect of 168.16\%, resulted in a balanced dataset of 2526:2526 reminders.  
-The same classifiers and ensemble methods were applied to the balanced dataset. Again, the basic J48 was used as the base of comparison for statistical significance tests between the classifiers as shown in Table \ref{tbl: utah-smote-classifiers}. In addition, comparisons between the datasets measures was also performed, as shown in Table \ref{tbl: utah-smote-dataset}.
-%TODO: Find why cant reference table
+The same classifiers and ensemble methods were applied to the balanced dataset. Again, the basic J48 was used as the base of comparison for statistical significance tests between the classifiers as shown in Table \ref{tbl: utah-smote-classifiers}. In addition, comparisons between the datasets measures was also performed, as presented in Table \ref{tbl: utah-smote-dataset}.
 
 \begin{table}[h]
 \centering
@@ -831,8 +829,8 @@ Measure & Dataset & \begin{tabular}[c]{@{}l@{}}J48 \\ (Base)\end{tabular} & Zero
 
 \begin{table}[ph]
 \centering
-\label{tbl: utah-smote-dataset}
 \caption{Comparison of measures between unbalanced and balanced (SMOTE) DC dataset}
+\label{tbl: utah-smote-dataset}
 \begin{tabular}{@{}lllll@{}}
 \toprule
 Measure                    & Classifier          & \begin{tabular}[c]{@{}l@{}}Utah \\ (Original)\end{tabular}  & \begin{tabular}[c]{@{}l@{}}Utah \\ (SMOTE)\end{tabular} &         \\ \midrule
@@ -912,9 +910,8 @@ ROC       & 0.5                                                     & 0.79  & 0.
 \end{table}
 
 \subsection{Comparison with Preliminary}
-Whilst the results are promising with the data gathered from the DC, it is worthwhile to compare with the data gathered from the TC, described earlier in the Chapter. The DC cohort had a very different ratio of acknowledged to missed reminders, 90:16 (Acknowledged: Missed). To ensure fair comparison the same method of oversampling using SMOTE and applying ensemble classifiers was applied to the TC's dataset. SMOTE was applied to the minority case, which in the TC was the missed reminder class, to the effect of 462.5\%. The results from each ensemble method were compared between the DC(SMOTE) and TC(SMOTE) datasets and the results are shown in Table \ref{tbl: smote-compare-dc-tc}. No significant differences were found in the results of either dataset, suggesting that the generalised approach is a good method for both cohorts. In addition the ROC model fit classification for the DC and TC averaged at Outstanding (.9) and Excellent (.83), respectively. In the interest of fully exploring the data, the DC dataset was used as the training set, and tested on the TC dataset using the strongest performing classifier tested in the study (Bagging using J48). The resulting accuracy of the model was only 66\% (F-Measure 0.651), showing that each cohorts data were not applicable as a training sources for the other.
-
-%TODO: It is perhaps not fully clear – what was your split between train and test when you calculated these  results?
+Whilst the results are promising with the data gathered from the DC, it is worthwhile to compare with the data gathered from the TC, described earlier in the Chapter. The TC cohort had a very different ratio of acknowledged to missed reminders, 90:16 (Acknowledged: Missed). To ensure fair comparison the same method of oversampling using SMOTE and applying ensemble classifiers was applied to the TC's dataset. SMOTE was applied to the minority case, which in the TC was the missed reminder class, to the effect of 462.5\%. The results from each ensemble method were compared between the DC(SMOTE) and TC(SMOTE) datasets and the results are shown in Table \ref{tbl: smote-compare-dc-tc}. No significant differences were found in the results of either dataset, suggesting that the generalised approach is a good method for both cohorts. In addition the ROC model fit classification for the DC and TC averaged at Outstanding (.9) and Excellent (.83), respectively. In the interest of fully exploring the data, the DC dataset (n = 3469) was used as the training set, and tested on the TC dataset (n = 106) using the strongest performing classifier tested in the study (Bagging using J48). The training and testing split in this case was 96.5\%:3.5\% (5052:180).
+The resulting accuracy of the model was only 66\% (F-Measure 0.651), showing that each cohorts data were not applicable as a training sources for the other.
 
 \begin{table}[h]
 \centering
