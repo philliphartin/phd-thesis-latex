@@ -37,7 +37,7 @@ The TTM is a stage theory that is often used as a guiding framework for many hea
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.16, angle=0]{Files/prevention-study-1/figures/ttm-stages-model}
-    \caption{Stages of behaviour change within the transtheoretical model}
+    \caption{Stages of behaviour change within the transtheoretical model.}
     \label{fig: ttm-model}
 \end{figure}
 
@@ -46,7 +46,7 @@ The model was first developed in relation to smoking cessation, however, has sin
 
 \begin{sidewaystable}[ph!]
 \centering
-\caption{Stages and Processes of the Transtheoretical Model of Behaviour Change}
+\caption{Stages and Processes of the Transtheoretical Model of Behaviour Change.}
 \label{tbl: ttm-states-description}
 \resizebox{23cm}{!}{% Resize
 \begin{tabular}{llll}
@@ -120,7 +120,7 @@ This Section details the development of a framework to guide the implementation 
 
 \subsection{The Stakeholders}
 The stakeholders of any intervention consist of the End-User/Study Participant (EU), and the Health Investigator/Study-coordinator (HI)
-The primary objective of the HI is to obtain accurate information on behaviours of the EU	, and their effects on observable health outcomes. The HI plays a large role in the design of the intervention through the scope of their research question. As such, they strongly influence the non-functional requirements of a suitable intervention platform.
+The primary objective of the HI is to obtain accurate information on behaviours of the EU, and their effects on observable health outcomes. The HI plays a large role in the design of the intervention through the scope of their research question. As such, they strongly influence the non-functional requirements of a suitable intervention platform.
 
 \subsection{Non-Functional Requirements}
 From analysis of existing approaches of behaviour change interventions \cite{Prochaska2005,Ruiter2014}, commercial health promotion apps \cite{Ozdalga2012, Higgins2016} and software engineering best practices \cite{Fielding2000, Jones2010}, a number of non-functional requirements have been identified by the author. These requirements are not specific `features' of a system, they are the desired characteristics that influence the design of the system architecture, and are listed below:
@@ -176,7 +176,7 @@ Evidently, internet technologies and smartphones can address these  requirements
 	\addplot table [x=month, y=desktop, col sep=comma]{Files/prevention-study-1/data/internetuse.csv};\addlegendentry{Desktop}
 	\end{axis}
 	\end{tikzpicture}
-	\caption{Percentage share of population who use digital devices for each platform}
+	\caption{Percentage share of the population who use digital devices to access the internet, for each platform.}
     \label{fig: graph-internetuse}
 \end{figure}
 
@@ -192,7 +192,7 @@ Conceptually, the entities within the framework can be modelled in an entity rel
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.9, angle=0]{Files/prevention-study-1/figures/erd-riskfactors}
-    \caption{Entity Relationship Model of Health Condition, Associated Risk Factors and Behaviours}
+    \caption{Entity Relationship Model of Health Condition, Associated Risk Factors and Behaviours.}
     \label{fig: erd-model}
 \end{figure}
 
@@ -251,11 +251,11 @@ There are a few general principles relating to education \cite{Gilbert2010} that
 %VIVA: Chris - comment about Fact Bank - Has anyone else tried this approach?
 Considering these principles, it is advised that a fact bank is created, containing short and impactful facts about the health condition. To supplement each fact, an example of a related behaviour and a positive health outcome should be attached. These should be presented to the user as often as possible to increase exposure and support learning. An example:
 \begin{displayquote}
-``Diabetes is the leading cause of blindness in working-age adults''
+\textit{``Diabetes is the leading cause of blindness in working-age adults''}
 \begin{center}
 	\rule{1cm}{0.4pt}
 \end{center}
-``Exercise is one of the most important things you can do to take control over diabetes. The key is to find something you enjoy doing and stick with it. It can be walking, swimming, cycling, or dancing — just get moving!. Aim for 30 minutes of activity, five days per week.''
+\textit{``Exercise is one of the most important things you can do to take control over diabetes. The key is to find something you enjoy doing and stick with it. It can be walking, swimming, cycling, or dancing — just get moving!. Aim for 30 minutes of activity, five days per week.''}
 \end{displayquote}
 
 This format follows the principles of education, and presents a fact about the condition which motivates the person to act based upon desirable results. This is then reinforced through suggestions of actions to achieve the desired result. This particular example may be accompanied with visual cues related to blindness and exercise.
@@ -386,7 +386,7 @@ It is possible to quantify behaviour in each domain by monitoring key measures. 
 
 \begin{table}[h]
 \centering
-\caption{Key Behaviour Measures for AD}
+\caption{Key Behaviour Measures for AD.}
 \label{tbl: key-measures}
 \resizebox{\textwidth}{!}{ %Resizes the box to fit all text
 \begin{tabular}{@{}llll@{}}
@@ -426,7 +426,7 @@ To assist users in their traversal of the TTM, education plays a key role to sup
 For each of the core domains and associated risk factors identified in Table \ref{tbl: behavioural domains},  numerous prevention methods were identified from medical literature, and further developed by a team of psychologists, epidemiologists and nutritionists at Utah State University \cite{Norton2015-TRCI}. These risk factors and their associated prevention methods were translated into layman's terms. Each identified risk factor or behaviour was assigned one or more suggestions, thereby creating over 160 fact and suggestion pairs. These pairs are hereafter referred to as daily facts. The quantity of the daily facts are reflective of the supporting medical literature and are summarised in Table \ref{tbl: daily fact count}. An example daily fact and related suggestion from the diet domain is as follows: \textit{“Consuming high amounts of processed foods is related to cognitive decline\ldots Try a fresh salad for dinner instead of something from a box”}.
 \begin{table}
 \centering
-\caption{Number of daily facts for each behavioural domain}
+\caption{Number of daily facts for each behavioural domain.}
 \label{tbl: daily fact count}
 \begin{tabular}{@{}l c@{}}
 \toprule
@@ -447,7 +447,7 @@ Information presented visually on a screen is processed differently than verball
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.25, angle=0]{Files/prevention-study-1/figures/screenshot-dailyfact.png}
-    \caption{Screenshot of app showing daily fact tab. Daily fact is accompanied by a coach avatar, which when tapped presents information on the supporting literary evidence}
+    \caption{Screenshot of app showing daily fact tab. Daily fact is accompanied by a coach avatar, which when tapped presents information on the supporting literary evidence.}
     \label{fig: screenshot-dailyfact}
 \end{figure}
 
@@ -463,7 +463,7 @@ In addition to the questions for the original 6 behavioural domains, a question 
 
 \begin{sidewaystable}[ph!]
 \centering
-\caption{Questions presented to the user, showing their minimum, maximum and recommended values}
+\caption{Questions presented to the user, showing their minimum, maximum and recommended values.}
 \label{tbl: questions}
 \resizebox{23cm}{!}{%  begin resize to fit text
 \begin{tabular}{lllllll}
@@ -500,7 +500,7 @@ Data entry for each question is facilitated by a bespoke list view, that uses a 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.25, angle=0]{Files/prevention-study-1/figures/screenshot-measure.png}
-    \caption{Screenshot of app showing self-reporting screens and supporting information. User enters their values using the slider bars}
+    \caption{Screenshot of app showing self-reporting screens and supporting information. User entered their values via the slider bars.}
     \label{fig: screenshot-measure}
 \end{figure}
 
@@ -508,7 +508,7 @@ Data entry for each question is facilitated by a bespoke list view, that uses a 
 To assess behaviour change for each domain, a number of questions are designed to be presented to the user. Each question seeks to measure information about a user's behaviours longitudinally, both in a qualitative and quantitative manner. In order for these measurements to remain accurate, the user must understand what the question is asking, how they can measure it, and what the favourable result is. Therefore, the user must be educated on the topic on which they are being queried.
 For example, the question:
 \begin{displayquote}
-``How many servings of nuts, seeds, or legumes did you eat today?"
+\textit{``How many servings of nuts, seeds, or legumes did you eat today?"}
 \end{displayquote}
 may elicit confusion for a number of reasons. Firstly, the user may not know the existence of certain food items. Secondly, the user may also be unsure as to what constitutes a \textit{`serving'} of the items, or how many servings are favoured.
 To address these issues, the app provides descriptions of all of these areas which may lead to potential uncertainty for the user. To access additional information for any question or behaviour, the user simply taps the question which presents a modal dialog box, as presented in Figure \ref{fig: screenshot-measure}. Ensuring that all users understand the question is vital for comparisons of self-reported behaviours across multiple users.
@@ -582,7 +582,7 @@ The data component controls the storing and uploading of the user's behaviours, 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.9, angle=0]{Files/prevention-study-1/figures/client-server}
-    \caption{Centralised Client-Server Network Model}
+    \caption{Centralised Client-Server Network Model.}
     \label{fig: clientserver-model}
 \end{figure}
 
@@ -613,7 +613,7 @@ The database schema describes the structure, format and relationships between th
 %VIVA: How does this schema relate to the earlier proposed ERD of one person has a disease, many risk etc.
 
 \subsubsection{Exposing models through a RESTful API} \label{subsection-api}
-With a well-defined and stable data model, it is possible to expose certain aspects of the model via an API. The creation of an API allows controlled interaction between the server and its clients, through a set of defined methods and routines. With the goal of keeping the data model intact on the central server, implementing strict protocols within the API is very beneficial. In this use-case, potential client's operating systems will be varied (iOS, Android). As such, their platform specific languages and data-models can also vary, however, the API requires that all data transmitted conforms to its protocols. Using a language independent notation, such as JSON (JavaScript Object Notation), enforces system-wide validity of transmitted data, which is of paramount importance to the health-investigators study analyses. Descriptions of the API objects, their JSON structure and example data are detailed in Appendix \ref{apndx: rest-objects}
+With a well-defined and stable data model, it is possible to expose certain aspects of the model via an API. The creation of an API allows controlled interaction between the server and its clients, through a set of defined methods and routines. With the goal of keeping the data model intact on the central server, implementing strict protocols within the API is very beneficial. In this use-case, potential client's operating systems will be varied (iOS, Android). As such, their platform specific languages and data-models can also vary, however, the API requires that all data transmitted conforms to its protocols. Using a language independent notation, such as JSON (JavaScript Object Notation), enforces system-wide validity of transmitted data, which is of paramount importance to the health-investigators study analyses. Descriptions of the API objects, their JSON structure and example data are detailed in Appendix \ref{apndx: rest-objects}.
 
 \subsection{Monitoring Participants}
 A large advantage of an internet orientated architecture is the readiness of data. In real-time, the HI can view when a user updates a behavioural log, enabling immediate (re)analysis of the data. The HI can perform queries on the RDBMS, through a private, protected network. To further improve the usability of the server for the HI, numerous methods were developed to aid the automation of data aggregation and statistical analysis. This analysis could be performed at an individual, or cohort level.
