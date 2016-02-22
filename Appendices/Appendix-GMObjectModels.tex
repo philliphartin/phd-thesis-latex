@@ -1,0 +1,25 @@
+\chap{API protocol objects} \label{apndx: rest-objects}
+This appendix details the objects served by the RESTFul API and provides examples of their structure and data.
+
+\section{Topics}
+A Topic object is at the highest organisational level of the educational content. Each topic is identified by a unique id, which is used as a foreign key reference for its associated daily facts and measures. JSON Example: \inputminted{json}{Files/prevention-study-1/code/topicexample.json}
+
+\section{DailyFacts}
+A DailyFact object belongs to a topic, and consists of a fact and suggestion pair, with references to the supporting scientific literature and an internet enabled hyperlink. JSON Example: \inputminted{json}{Files/prevention-study-1/code/dailyfact.json}
+
+\section{Measures}
+A Measure object belongs to a topic and describes a behaviour which is being measured. This measure contains the recommended goal and its unit of measurement. The object also provides a general description of the behaviour, the benefits of adopting the behaviour, and examples of ways to implement the behaviour change. JSON Example: \inputminted{json}{Files/prevention-study-1/code/measures.json}
+
+\section{UserEntry}
+The UserEntry object describes a user's reported behaviour for a specific measure. The date in which the behaviour was performed is recorded, as is the date that the object was updated. The date is recorded both as an ISO 8601 format and as a unixtime integer. The source of the data is also recorded. Within the Gray Matters study, the source for all UserEntries were from direct input by the user. No external services or devices were used. JSON Example: \inputminted{json}{Files/prevention-study-1/code/userentry.json}
+
+\subsection{User}
+The User object is a basic object which contains a unique identifier, an email address and an encrypted hash of the user's password. JSON Example:
+\inputminted{json}{Files/prevention-study-1/code/user.json}
+
+\section{PersonalDetails}
+The PersonalDetails object facilitates the recording of extra information on each user. For security reasons, this information is decoupled from the User object, and linked only via userId. A user's name, gender, country and date of birth are contained in this object. JSON Example: \inputminted{json}{Files/prevention-study-1/code/personaldetails.json}
+
+\section{AccessToken}
+The AccessToken object contains authentication information for a specific user, which facilitates  access control and data control. TTL (Time to Live) is a mechanism that limits the lifespan of the AccessToken. In this object it is expressed in seconds. JSON Example: \inputminted{json}{Files/prevention-study-1/code/accesstoken.json}
+
