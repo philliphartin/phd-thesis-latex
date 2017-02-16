@@ -385,7 +385,6 @@ P27 & 0 & 0 & 0 & 0 & - & - \\
 P28 & 0 & 0 & 0 & 0 & - & - \\
 P29 & 0 & 0 & 0 & 0 & - & - \\
 P30 & 0 & 0 & 0 & 0 & - & - \\ \midrule
-Sum & 8784 & 1686.0 & 4603.0 & 2495.0 & 941.8\% & 1458.2\% \\
 Mean & 302.8965517 & 58.1 & 158.7 & 86.0 & 39.2\% & 60.8\% \\ \bottomrule
 \end{tabular}
 }
@@ -477,9 +476,6 @@ In the example of accelerometer data, a 10 second sample, sampled at 100Hz, cont
         \label{fig: feature-selection-example}
 \end{figure}
 
-A key concept of the approach is that feature selection results in a set of relevant features, whilst removing redundant or irrelevant features which could negatively impact upon the accuracy of a classification model. The result is a set of features that are optimised to discriminate between the classes.
-%VIVA: It is more that you are reducing the dimensionality of the problem as described by the feature vecore.  If this is reduced the classifier has an easier job at classifying the data.  The features assist in better discriminating between the classes.
-
 \subsubsection{Signal Magnitude Area}
 Multi-dimensional time-series data provides the opportunity to calculate additional features, such as the Signal Magnitude Area (SMA), as depicted in Equation \ref{eq: SMA},
 \begin{equation}
@@ -520,7 +516,7 @@ Although there are 4 sensors in the study, each sensor can provide a multitude o
 \subsubsection{Multi-dimensional}
 The accelerometer and magnetometer format their readings as a 4-dimensional array, consisting of time (t), and the 3-dimensions of space (x, y and z). Each individual dimension can be extracted from the array enabling a number of options for analysis. For example, it is possible to create a composite signal, by calculating the Signal Vector Magnitude (SVM) as described in Equation \ref{eq: SVM}.
 \begin{equation}
-SVM =\frac{1}{n} \sum_{i=1}^b \sqrt{x_i^2 + y_i^2 + z_i^2 }
+SVM =\frac{1}{n} \sum_{i=1}^n \sqrt{x_i^2 + y_i^2 + z_i^2 }
 \label{eq: SVM}
 \end{equation}
 where $x$, $y$ and $z$ are the signals from each axis with respect to the sample number $n$, in a window.
@@ -563,7 +559,7 @@ To determine the appropriate size for this study, a number of tests were perform
 
 \textbf{Sliding Window-Length.}
 Firstly a number of samples of missed and acknowledged reminders were chosen to study. For each recording the statistical features were extracted and recorded.
-A range of window lengths (3-61) were then applied to the samples. From the resulting filtered signal, the same statistical features were calculated.
+A range of sample window lengths (3-61) were then applied to the signals. From the resulting filtered signal, the same statistical features were calculated.
 %VIVA: Why 3-61?
 As the system aims to solve a binary classification problem (recognising acknowledged or missed), it was decided that the numerical difference between the features was key to a classifier's success. As such, a percentage difference comparison between the features of missed and acknowledged reminders was then performed for the raw and filtered data of various window lengths.
 From the samples, the mean percentage difference between the classes (Acknowledged, Missed) for the unfiltered data, was 54\%, as seen in Figure \ref{fig: filter-percentage-difference} and Table \ref{tbl: percentage-difference-example}. Filtering the data using a median filter, with the minimum window length of 3 immediately improved the percentage difference observed. As presented in Figure \ref{fig: filter-percentage-difference}, increasing the window-length continues to widen the percentage difference in the features from the two classes.
@@ -575,7 +571,7 @@ From the samples, the mean percentage difference between the classes (Acknowledg
         \label{fig: filter-percentage-difference}
 \end{figure}
 
-At a window-length of 15, the difference reaches its first peak, after which, future improvement comes at computationally diminishing returns, eventually plateauing at the maximum of 61. An example of output from the process, using the observed optimal window-length of 15 for the median filter is shown in Table \ref{tbl: percentage-difference-example}.
+At a sample window-length of 15, the difference reaches its first peak, after which, future improvement comes at computationally diminishing returns, eventually plateauing at the maximum of 61. An example of output from the process, using the observed optimal window-length of 15 for the median filter is shown in Table \ref{tbl: percentage-difference-example}.
 %VIVA: Chris comment -  Has this been a subjective process if limited data has been used to define the window length.  I guess it is difficult to justify this either way.
 
 \begin{table}[]
@@ -654,6 +650,9 @@ Once all the features have been selected and labelled for their respective class
 
 As no single classifier family has had a distinct advantage in context or activity classification problems \cite{Mitchell2013a}, the author examined all possible options provided by the Weka tool. In each case, a classifier's performance is benchmarked against the ZeroR classifier, which predicts the modal, or majority, class for all future instances. E.g., for a data set of 60 instances of Class A, and 40 instances of Class B, the ZeroR classifier will classify all new instances as the most frequently occurring class (Class A), resulting in an baseline accuracy of 60\%.
 
+\subsubsection{Classifier Parameters}
+A classifiers parameters can be further optimised by configuring its parameters, such as the number of folds, the confidence interval, the number of nodes or depth in a decision tree, and the complexity parameter of a support vector machine. In this study, however, the parameters selected were the default parameters set by the Weka software package. This decision was made to promote reproducibility of the approach and to reduce the specificity in the results.
+
 \subsubsection{Measures of Comparison}
 Accuracy, when used as the main metric of comparison can be a misleading representation of a classifiers performance. In addition to the accuracy (percentage correct), the sensitivity (precision), specificity (recall), Kappa statistic and the Area Under the ROC curve are also considered in the comparison of results.
 
@@ -669,7 +668,7 @@ The specificity, or recall, of the classifier is the proportion of instances cla
 \textbf{Kappa Statistic.}
 The kappa statistic is a valuable measure to compare classifiers amongst themselves. The statistic is the result of the comparison between the observed accuracy of the classifier, with an expected accuracy, obtained through random chance. An advantage of using the kappa statistic to compare classifiers is the ability to categorise into performance groups, such as those proposed by \citeauthor{Landis1977}: 0-0.20 as slight, 0.21-0.40 as fair, 0.41-0.60 as moderate, 0.61-0.80 as substantial, and 0.81-1 as almost perfect \cite{Landis1977}.
 
-\textbf{Area Under Curve (ROC).}
+\textbf{Area Under Curve (AUC).}
 The Area Under Curve metric measures the performance of a binary classification. When used in a regression classification for a binary class problem, it is possible to plot the probability threshold changes in an ROC curve \cite{Metz1978}. This curve plots the True Positive rate against the False positive rate. An example ROC graph is presented in Figure \ref{fig: auc-roc-example}.
 
 \begin{figure}[h]
@@ -688,6 +687,7 @@ Medical practitioners using the AUC suggest the following classifications for th
   \item .60-.70 - Poor
   \item .50-.60 - No Discrimination
 \end{itemize}
+
 
 \subsection{Overview}
 The order of the process is displayed in Figure \ref{fig: process-overview}. Raw sensor data is downloaded from the device, paired with reminder data, windowed, filtered, and features are extracted from both filtered and non-filtered data. The features are then appended to a list, and exported to external file system as both a labelled csv file, and a Weka formatted arff file.
@@ -745,7 +745,7 @@ Measure & \begin{tabular}[c]{@{}l@{}}Window\\ Length\end{tabular} & \begin{tabul
  & 30 & 0 & 0.63 & 0.5 & 0.56 & 0.3 & 0.47 & 0.65 & 0.52 \\ \midrule
 \multirow{2}{*}{Kappa} & 20 & 0 & 0.52 & 0.16 & 0.41 & 0.22 & 0.16 & 0.52 & 0.33 \\
  & 30 & 0 & 0.49 & 0.18 & 0.43 & 0.22 & 0.16 & 0.53 & 0.34 \\ \midrule
-\multirow{2}{*}{ROC} & 20 & 0.5 & 0.78 & 0.64 & 0.79 & 0.58 & 0.61 & 0.76 & 0.69 \\
+\multirow{2}{*}{AUC} & 20 & 0.5 & 0.78 & 0.64 & 0.79 & 0.58 & 0.61 & 0.76 & 0.69 \\
  & 30 & 0.5 & 0.77 & 0.64 & 0.8 & 0.58 & 0.61 & 0.77 & 0.70 \\ \bottomrule
 \end{tabular}
 }
@@ -765,7 +765,7 @@ Bagging creates separate training samples from the original dataset, and creates
 \textbf{Blending.}
 Blending, or stacking, involves using multiple different classification algorithms to prepare a model on the training data. After which, a combiner algorithm, or meta-classifier, is trained to make the final prediction, using the predictions of the other classifiers as inputs.
 
-As the J48 and JRip algorithms performed best on the data in the previous section, J48 was used as the base classifier for both boosting and Bagging, and a combination of J48 and JRip were used for the Blending (Stacking) algorithm. Each was applied to the DC's data, and the results compared against the J48 (C4.5 decision tree) from the previous section. Full results are displayed in Table \ref{tbl: utah-ensemble-results}. The application of Bagging (J48) and Blending (J48 with JRip) resulted in significant improvement in accuracy, precision and ROC over the base J48, whilst significantly decreasing recall. In this case, the decrease in recall (True Positive Rate) is the ability to correctly identify a context in which acknowledgements occurred. An ROC of over .8, as found with the ensemble methods would be considered an excellent fit by the guidelines outlined in \cite{Tape}.
+As the J48 and JRip algorithms performed best on the data in the previous section, J48 was used as the base classifier for both boosting and Bagging, and a combination of J48 and JRip were used for the Blending (Stacking) algorithm. Each was applied to the DC's data, and the results compared against the J48 (C4.5 decision tree) from the previous section. Full results are displayed in Table \ref{tbl: utah-ensemble-results}. The application of Bagging (J48) and Blending (J48 with JRip) resulted in significant improvement in accuracy, precision and AUC over the base J48, whilst significantly decreasing recall. In this case, the decrease in recall (True Positive Rate) is the ability to correctly identify a context in which acknowledgements occurred. An AUC of over .8, as found with the ensemble methods would be considered an excellent fit by the guidelines outlined in \cite{Tape}.
 
 \begin{table}[h]
 \centering
@@ -780,7 +780,7 @@ Precision & 0.63 & 0 & $\bullet$ & 0.68 & $\circ$ & 0.62 &  & 0.71 & $\circ$ & 0
 Recall & 0.63 & 0 & $\bullet$ & 0.64 &  & 0.57 & $\bullet$ & 0.57 & $\bullet$ & 0.56 & $\bullet$ \\
 F-Measure & 0.63 & 0 & $\bullet$ & 0.65 &  & 0.59 & $\bullet$ & 0.63 &  & 0.62 &  \\
 Kappa & 0.49 & 0 & $\bullet$ & 0.53 &  & 0.45 &  & 0.51 &  & 0.51 &  \\
-ROC & 0.77 & 0.5 & $\bullet$ & 0.77 &  & 0.82 & $\circ$ & 0.85 & $\circ$ & 0.82 & $\circ$ \\ \midrule
+AUC & 0.77 & 0.5 & $\bullet$ & 0.77 &  & 0.82 & $\circ$ & 0.85 & $\circ$ & 0.82 & $\circ$ \\ \midrule
 \multicolumn{12}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation at the p\textless .05 level} \\ \bottomrule
 \end{tabular}
 }
@@ -820,7 +820,7 @@ Measure & Dataset & \begin{tabular}[c]{@{}l@{}}J48 \\ (Base)\end{tabular} & Zero
  & SMOTE & 0.82 & 0 & $\bullet$ & 0.84 &  & 0.81 &  & 0.84 & $\circ$ & 0.82 &  \\ \midrule
 \multirow{2}{*}{Recall} & Imbalanced & 0.63 & 0 & $\bullet$ & 0.64 &  & 0.57 & $\bullet$ & 0.57 & $\bullet$ & 0.56 & $\bullet$ \\
  & SMOTE & 0.73 & 0 &  & 0.74 &  & 0.86 & $\circ$ & 0.74 &  & 0.76 &  \\ \midrule
-\multirow{2}{*}{ROC} & Imbalanced & 0.77 & 0.5 & $\bullet$ & 0.77 &  & 0.82 & $\circ$ & 0.85 & $\circ$ & 0.82 & $\circ$ \\
+\multirow{2}{*}{AUC} & Imbalanced & 0.77 & 0.5 & $\bullet$ & 0.77 &  & 0.82 & $\circ$ & 0.85 & $\circ$ & 0.82 & $\circ$ \\
  & SMOTE & 0.85 & 0.5 & $\bullet$ & 0.82 &  & 0.9 & $\circ$ & 0.91 & $\circ$ & 0.89 & $\circ$ \\ \midrule
  \multicolumn{13}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation at the p \textless .05 level} \\ \bottomrule
 \end{tabular}
@@ -838,43 +838,37 @@ Measure                    & Classifier          & \begin{tabular}[c]{@{}l@{}}Ut
                            & J48                 & 79.93 & 78.31                                                   &         \\
                            & Boosting (J48)      & 78.69 & 82.98                                                   & $\circ$ \\
                            & Bagging  (J48)      & 81.89 & 79.83                                                   &         \\
-                           & Blending (J48/JRip) & 81.92 & 79.57                                                   &         \\
-                           & Average             & 79.52 & 75.11                                                   &         \\ \midrule
+                           & Blending (J48/JRip) & 81.92 & 79.57                                                   &         \\ \midrule
 \multirow{6}{*}{Precision} & JRip                & 0.68  & 0.84                                                    & $\circ$ \\
                            & J48                 & 0.63  & 0.82                                                    & $\circ$ \\
                            & Boosting (J48)      & 0.62  & 0.81                                                    & $\circ$ \\
                            & Bagging  (J48)      & 0.71  & 0.84                                                    & $\circ$ \\
-                           & Blending (J48/JRip) & 0.71  & 0.82                                                    & $\circ$ \\
-                           & Average             & 0.56  & 0.74                                                    &         \\ \midrule
+                           & Blending (J48/JRip) & 0.71  & 0.82                                                    & $\circ$ \\ \midrule
 \multirow{6}{*}{Recall}    & JRip                & 0.64  & 0.74                                                    &         \\
                            & J48                 & 0.63  & 0.73                                                    &         \\
                            & Boosting (J48)      & 0.57  & 0.86                                                    & $\circ$ \\
                            & Bagging  (J48)      & 0.57  & 0.74                                                    & $\circ$ \\
-                           & Blending (J48/JRip) & 0.56  & 0.76                                                    & $\circ$ \\
-                           & Average             & 0.49  & 0.74                                                    &         \\ \midrule
+                           & Blending (J48/JRip) & 0.56  & 0.76                                                    & $\circ$ \\ \midrule
 \multirow{6}{*}{F-Measure} & JRip                & 0.65  & 0.78                                                    & $\circ$ \\
                            & J48                 & 0.63  & 0.77                                                    & $\circ$ \\
                            & Boosting (J48)      & 0.59  & 0.83                                                    & $\circ$ \\
                            & Bagging  (J48)      & 0.63  & 0.78                                                    & $\circ$ \\
-                           & Blending (J48/JRip) & 0.62  & 0.79                                                    & $\circ$ \\
-                           & Average             & 0.52  & 0.72                                                    &         \\ \midrule
+                           & Blending (J48/JRip) & 0.62  & 0.79                                                    & $\circ$ \\ \midrule
 \multirow{6}{*}{Kappa}     & JRip                & 0.53  & 0.6                                                     &         \\
                            & J48                 & 0.49  & 0.57                                                    &         \\
                            & Boosting (J48)      & 0.45  & 0.66                                                    & $\circ$ \\
                            & Bagging  (J48)      & 0.51  & 0.6                                                     &         \\
-                           & Blending (J48/JRip) & 0.51  & 0.59                                                    & $\circ$ \\
-                           & Average             & 0.42  & 0.5                                                     &         \\ \midrule
-\multirow{6}{*}{ROC}       & JRip                & 0.77  & 0.82                                                    & $\circ$ \\
+                           & Blending (J48/JRip) & 0.51  & 0.59                                                    & $\circ$ \\ \midrule
+\multirow{6}{*}{AUC}       & JRip                & 0.77  & 0.82                                                    & $\circ$ \\
                            & J48                 & 0.77  & 0.85                                                    & $\circ$ \\
                            & Boosting (J48)      & 0.82  & 0.9                                                     & $\circ$ \\
                            & Bagging  (J48)      & 0.85  & 0.91                                                    & $\circ$ \\
-                           & Blending (J48/JRip) & 0.82  & 0.89                                                    & $\circ$ \\
-                           & Average             & 0.75  & 0.81                                                    &         \\ \midrule
+                           & Blending (J48/JRip) & 0.82  & 0.89                                                    & $\circ$ \\ \midrule
 \multicolumn{5}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation at the p \textless .05 level} \\ \bottomrule
 \end{tabular}
 \end{table}
 
-The application of the SMOTE algorithm resulted in an improvement in almost every measurement for each classifier. The best improvements can be found in the recall and ROC of the boosting, bagging and blending ensemble methods. Recall, a previous weak point of the system has now been improved substantially, resulting in an ROC of .91 (outstanding) in the bagging method.
+The application of the SMOTE algorithm resulted in an improvement in almost every measurement for each classifier. The best improvements can be found in the recall and AUC of the boosting, bagging and blending ensemble methods. Recall, a previous weak point of the system has now been improved substantially, resulting in an AUC of .91 (outstanding) in the bagging method.
 
 \subsubsection{Feature Evaluation}
 Whilst the classifier was generated using a dataset which contained 330 features, it is highly likely that only a limited number of these were used. It is possible to rank the importance of these features in the classifier, exposing features which have been calculated, yet are redundant to the model. Identifying these features and removing them, will optimise the speed at which features are calculated for the model, an important step if the features are to be eventually calculated on the device.
@@ -905,12 +899,12 @@ Precision & 0                                                       & 0.7   & 0.
 Recall    & 0                                                       & 0.67  & 0.63 & 0.6                                                                  & 0.62                                                     & 0.61                                                           \\
 F-Measure & 0                                                       & 0.68  & 0.67 & 0.62                                                                 & 0.67                                                     & 0.66                                                           \\
 Kappa     & 0                                                       & 0.57  & 0.56 & 0.49                                                                 & 0.56                                                     & 0.55                                                           \\
-ROC       & 0.5                                                     & 0.79  & 0.82 & 0.83                                                                 & 0.85                                                     & 0.83                                                           \\ \bottomrule
+AUC       & 0.5                                                     & 0.79  & 0.82 & 0.83                                                                 & 0.85                                                     & 0.83                                                           \\ \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Comparison with Preliminary}
-Whilst the results are promising with the data gathered from the DC, it is worthwhile to compare with the data gathered from the TC, described earlier in the Chapter. The TC cohort had a very different ratio of acknowledged to missed reminders, 90:16 (Acknowledged: Missed). To ensure fair comparison the same method of oversampling using SMOTE and applying ensemble classifiers was applied to the TC's dataset. SMOTE was applied to the minority case, which in the TC was the missed reminder class, to the effect of 462.5\%. The results from each ensemble method were compared between the DC(SMOTE) and TC(SMOTE) datasets and the results are shown in Table \ref{tbl: smote-compare-dc-tc}. No significant differences were found in the results of either dataset, suggesting that the generalised approach is a good method for both cohorts. In addition the ROC model fit classification for the DC and TC averaged at Outstanding (.9) and Excellent (.83), respectively. In the interest of fully exploring the data, the DC dataset (n = 3469) was used as the training set, and tested on the TC dataset (n = 106) using the strongest performing classifier tested in the study (Bagging using J48). The training and testing split in this case was 96.5\%:3.5\% (5052:180).
+Whilst the results are promising with the data gathered from the DC, it is worthwhile to compare with the data gathered from the TC, described earlier in the Chapter. The TC cohort had a very different ratio of acknowledged to missed reminders, 90:16 (Acknowledged: Missed). To ensure fair comparison the same method of oversampling using SMOTE and applying ensemble classifiers was applied to the TC's dataset. SMOTE was applied to the minority case, which in the TC was the missed reminder class, to the effect of 462.5\%. The results from each ensemble method were compared between the DC(SMOTE) and TC(SMOTE) datasets and the results are shown in Table \ref{tbl: smote-compare-dc-tc}. No significant differences were found in the results of either dataset, suggesting that the generalised approach is a good method for both cohorts. In addition the AUC model fit classification for the DC and TC averaged at Outstanding (.9) and Excellent (.83), respectively. In the interest of fully exploring the data, the DC dataset (n = 3469) was used as the training set, and tested on the TC dataset (n = 106) using the strongest performing classifier tested in the study (Bagging using J48). The training and testing split in this case was 96.5\%:3.5\% (5052:180).
 The resulting accuracy of the model was only 66\% (F-Measure 0.651), showing that each cohorts data were not applicable as a training sources for the other.
 
 \begin{table}[h]
@@ -941,7 +935,7 @@ Measure                    & Classifier & DC & TC \\ \midrule
                            & Bagging    & 0.6                 & 0.56                  \\
                            & Blending   & 0.59                & 0.56                  \\
                            & Average    & 0.62                & 0.55                  \\ \midrule
-\multirow{4}{*}{ROC}       & Boosting   & 0.9                 & 0.83                  \\
+\multirow{4}{*}{AUC}       & Boosting   & 0.9                 & 0.83                  \\
                            & Bagging    & 0.91                & 0.86                  \\
                            & Blending   & 0.89                & 0.81                  \\
                            & Average    & 0.90                & 0.83                  \\ \bottomrule
@@ -952,9 +946,6 @@ Measure                    & Classifier & DC & TC \\ \midrule
 \subsection{Individual Model}
 Whilst using a generalised model would help alleviate the cold start problem, the apparent variance between participants from both DC and TC suggested that an individualised model may yield superior results. To test this notion, each participant's data was filtered into their own dataset and tested against the configuration of classifiers identified in the generalised model section.
 
-\subsubsection{Imbalanced Data}
-Again the common issue of imbalanced data occurs, although more frequently in the analysis of the individual data. As the participants from the TC used the device for only 1 week, the total number of instances for this cohort is considerably lower. 
-For many of the participants in both the DC and TC, it was not possible to perform 10-fold cross validation due to a lack of reminder instances. It was also not possible to use an 80:20 training testing split, as the ensemble methods still require a number of iterations to refine their supporting second or meta classifiers.
 
 \subsubsection{Results}
 For the participants for whom it was applicable, their data set was balanced through application of SMOTE.  J48 and Bagging with J48 classifiers were applied to each participant, and subsequently benchmarked against ZeroR as presented in Table \ref{tbl: smote-individual}.
@@ -991,12 +982,13 @@ Mean & 8.8 & 76.54 &  & 77.07 &  & 0.72 &  & 0.72 &  \\ \midrule
 In this test, creating an individual classifier model for each individual results in a large degree of variance. In most cases, the model is better than ZeroR, a majority classifier, however, in some cases it is not. Further analysis shows a lack of original instances to be the root cause, from which SMOTE was unable to introduce any additional variance. In many cases the oversampling factor is greater than 4, showing that every individual had a dataset which was imbalanced to a large degree. DC06 displays the perfect example of overfitting the data to a minority class, resulting in a J48 with a classification of near 100\% (F-measure = 1).
 
 \subsection{Discussion}
-The study has demonstrated the effectives of various classifiers to distinguish between contexts in which reminders are missed or acknowledged. The features extracted from the contextual sensor data, provided a strong base from which an optimal 8 were identified for use with decision trees. Ensemble classifiers based upon C4.5 decision trees boosted the performance significantly.  Having applied SMOTE to balance the datasets, additional classifier performance was achieved. Across the datasets and classifiers, recall was consistently the most under performing measure. In this binary classification problem, recall (or sensitivity) is the classifier's ability to correctly identify contexts in which acknowledgements occurred. Again this is simply due to an imbalance in the original datasets, for which SMOTE was unable to fully mask.
+The study has demonstrated the effectiveness of various classifiers to distinguish between contexts in which reminders are missed or acknowledged. The features extracted from the contextual sensor data, provided a strong base from which an optimal 8 were identified for use with decision trees. Ensemble classifiers based upon C4.5 decision trees boosted the performance significantly.  Having applied SMOTE to balance the datasets, additional classifier performance was achieved. Across the datasets and classifiers, recall was consistently the most under performing measure. In this binary classification problem, recall (or sensitivity) is the classifier's ability to correctly identify contexts in which acknowledgements occurred. Again this is simply due to an imbalance in the original datasets, for which SMOTE was unable to fully mask. 
+These findings are consistent with a similar study by \citeauthor{Poppinga2014}, in which the observations of smartphone notification interactions were heavily skewed to the missed class (78.08\%) \cite{Poppinga2014}. Comparison of the best observed classification results from each study highlights that the use of ensemble classifiers can provide an additional boost in performance (Kappa: 0.6, AUC: 0.91) when compared against \cite{Poppinga2014}, who employed a C4.5 decision tree only (Kappa: 0.17 , AUC: 0.72). 
 
 It is hard to argue which is more important, the recognition of contexts in which a reminder will be missed, or the recognition of those which will be acknowledged. Improving the accuracy of the system to identify contexts in which the reminder will be missed would permit the system to avoid making poor use of the reminder at that time. Having recognised a poor context in which to avoid delivery, the recognition of an appropriate context is the next phase of the approach.
 From the results of the generalised model, and those who did not truly adopt the platform, the recognition of a poor context is simple, given that almost all observed contexts resulted in a missed reminder.
 Perhaps for these users, no amount of improvement in context-aware delivery will aid their situation given that they are simply non-adopters of technology. In this case, it is for the adopters that future effort and refinements will benefit, even if to only marginally improve their situation and increase their independence.
-%VIVA: Chris - Very good point.  Probably worth incluing in your last Chapter as an overall finding/
+%VIVA: Chris - Very good point.  Probably worth including in your last Chapter as an overall finding.
 
 \section{Limitations}
 
@@ -1011,6 +1003,10 @@ A key contributing factor for the large number of missed reminders was due to th
 
 \subsubsection{Loss Of Data from Testing Evaluation}
 During the analysis of the data collected from the TC, it was noted that in some cases synchronicity between reminder instances and sensor recordings could not be established. This was due to the issues which were noted in Section \ref{subsection: improvements}, which were subsequently fixed prior to deployment with the DC. Nevertheless, valuable test data was lost, reducing the ability to truly test individualised models with reasonably balanced data.
+
+\subsubsection{Cross Validation}
+Within the development of an individual model, again the common issue of imbalanced data occurs. As the participants from the TC used the device for only 1 week, the total number of instances for this cohort was considerably lower. 
+For many of the participants in both the DC and TC, it was not possible to perform 10-fold cross validation due to a lack of reminder instances. It was also not possible to use an 80:20 training testing split, as the ensemble methods still require a number of iterations to refine their supporting second or meta classifiers.
 
 \section{Future Works}
 The ultimate aim of this work, was to influence the delivery of reminders in real-time for PwD, to improve their adherence to reminders. Although this aim was not fully achieved in this study, the work demonstrated that it was possible to recognise the contexts suitable for such a system. There are, however, a number of improvements that could be made to the current process along with the future goals.
@@ -1035,4 +1031,4 @@ This Chapter has demonstrated the smartphone's efficiency as a reminder system f
 In the interest of transparency and to contribute to the field, all source code for the android reminder app, and the python program developed to process the resulting sensor data are available online under the MIT licence \footnote{MIT licence: http://opensource.org/licenses/mit-license}.
 
 \textbf{Android Reminder app} \newline \texttt{https://github.com/pjhartin/taut-reminderapp-android}
-\newline \textbf{Python Sensor Analysis} \newline \texttt{https://github.com/pjhartin/taut-sensoranalysis-python}
+\newline \textbf{Python Sensor Analysis} \newline \texttt{https://github.com/pjhartin/taut-sensoranalysis-python}  

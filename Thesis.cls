@@ -25,7 +25,7 @@
 \thispagestyle{plain}
 \null\vfil
 %\vskip 60\p@
-\begin{center}{\huge\bf Declaration of Authorship\par}\end{center}
+\begin{center}{\huge\bf Declaration\par}\end{center}
 %\vskip 60\p@
 {\normalsize #1}
 \vfil\vfil\null
@@ -189,31 +189,30 @@
     \vskip 60\p@
     \begin{center}
       \setlength{\parskip}{0pt}
-      {\large\textbf{\UNIVNAME}\par}
-      \vfill
       {\huge \bf \@title \par}
-      \vfill
-      {\LARGE by \par}
-      \smallskip
+      \bigskip
+      \bigskip
+      {by \par}
+      \bigskip
       {\LARGE \authornames \par}
       \smallskip
       {\large \myAuthorPrevDeg \par}
       \vfill
+      \vfill
+      \vfill
+      \vfill
+      {\large \facname \par}
+      {\large\univname \par}
+    \bigskip
+       \bigskip      
       {\large \myPartyalFulfillment \par}
       {\large \myDegree \par}
-      \bigskip
-      \bigskip
-%      {\large Supervised by \par}
-%      {\large \supervisorOne \par}
-%      {\large \supervisorTwo \par}
-%      {\large in the \par}
-      {\large \facname \par}
-%      {\large \deptname \par}
-%      \bigskip
-%      \bigskip
-      \bigskip
+       \bigskip
+       \bigskip
       {\Large \@date \par}
-      \bigskip
+%      \vfill
+       \bigskip
+       \bigskip      {\myWordCountDeclare \par}
     \end{center}
     \par
     \@thanks
